@@ -43,9 +43,8 @@ openai_api_key = st.text_input('OpenAI API Key', type='password', disabled=not (
 # App logic
 if query_text is 'Other':
   query_text = st.text_input('Inserisci la tua domanda:', placeholder = 'Scrivi qui la tua domanda ...', disabled=not uploaded_file)
-if not openai_api_key.startswith('sk-'):
-  st.warning('Inserisci la chiave di Open AI!', icon='⚠')
-if openai_api_key.startswith('sk-') and (uploaded_file is not None):
+# App logic
+if openai_api_key.startswith('sk-') and (uploaded_file is not None) and (uploaded_description is not None):
   st.header('Output')
   generate_response(uploaded_file, uploaded_description, query_text)
 
