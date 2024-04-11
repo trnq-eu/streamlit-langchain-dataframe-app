@@ -4,13 +4,12 @@ from langchain.chat_models import ChatOpenAI
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from langchain.agents.agent_types import AgentType
 
-
-
-
-
 # Page title
 st.set_page_config(page_title='🦜🔗 Data App Conversazionale')
 st.title('🦜🔗 Data App Conversazionale')
+
+# Aggiunta del campo per caricare la descrizione del file CSV
+uploaded_description = st.text_area('Carica la descrizione del file CSV', height=100)
 
 # Load CSV file
 def load_csv(input_csv):
@@ -48,5 +47,5 @@ if not openai_api_key.startswith('sk-'):
   st.warning('Inserisci la chiave di Open AI!', icon='⚠')
 if openai_api_key.startswith('sk-') and (uploaded_file is not None):
   st.header('Output')
-  generate_response(uploaded_file, query_text)
+  generate_response(uploaded_file, uploaded_description, query_text)
 
