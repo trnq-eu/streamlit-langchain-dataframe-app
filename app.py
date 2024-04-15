@@ -5,15 +5,15 @@ from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe
 from langchain.agents.agent_types import AgentType
 
 # Page title
-st.set_page_config(page_title='🦜🔗 Data App Conversazionale')
-st.title('🦜🔗 Data App Conversazionale')
+st.set_page_config(page_title='Interroga file csv')
+st.title('Interroga tabelle di dati in formato csv')
 
 
 
 # Load CSV file
 def load_csv(input_csv):
   df = pd.read_csv(input_csv)
-  with st.expander('See DataFrame'):
+  with st.expander('Guarda la tabella'):
     st.write(df)
   return df
 
@@ -33,11 +33,10 @@ def generate_response(csv_file, input_query):
 uploaded_file = st.file_uploader('Carica il tuo file csv', type=['csv'])
 question_list = [
   'Quante righe ha il file?',
-  'Quali sono le tipologie di beni?',
-  'Quali sono le città menzionate nel file?',
+  'Quali sono le colonne del file?',
   'Other']
-query_text = st.selectbox('scegli una domanda:', question_list, disabled=not uploaded_file)
-openai_api_key = st.text_input('OpenAI API Key', type='password', disabled=not (uploaded_file and query_text))
+query_text = st.selectbox('Scegli una domanda:', question_list, disabled=not uploaded_file)
+openai_api_key = st.text_input('Chiave di OpenAI API', type='password', disabled=not (uploaded_file and query_text))
 
 # App logic
 if query_text is 'Other':
